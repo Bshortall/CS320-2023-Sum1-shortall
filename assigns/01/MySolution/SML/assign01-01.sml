@@ -21,7 +21,11 @@ and then compute the size of the converted list
 (* ****** ****** *)
 
 fun
-xlist_size(xs: 'a xlist): int = raise NotImplemented320
+xlist_size(xs: 'a xlist): int = 
+    case xs of
+        xlist_nil => 0
+      | head::tail => 1 + xlist_size(tail)
+      | _ => raise XlistConsMatch
 
 (* ****** ****** *)
 

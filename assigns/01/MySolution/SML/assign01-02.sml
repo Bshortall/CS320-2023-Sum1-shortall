@@ -25,7 +25,18 @@ then do subscripting.
 
 fun
 xlist_sub
-(xs: 'a xlist, i0: int): 'a = raise NotImplemented320
+(xs: 'a xlist, i0: int): 'a = 
+if i0 < 0 then raise XlistSubscript
+else if i0 = 0 then
+  case xs of
+    XNil => raise XlistSubscript
+  | XCons(x, _) => x
+else
+  case xs of
+    XNil => raise XlistSubscript
+  | XCons(_, xf) => xlist_sub(xf(), i0-1) 
+
+
 
 (* ****** ****** *)
 

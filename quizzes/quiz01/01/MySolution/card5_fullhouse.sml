@@ -141,9 +141,38 @@ HX-2023-05-31:
 Please assume that cs is a list of 5 cards
 that are sorted according to their ranks.
 *)
+
+
 fun
-card5_fullhouse
-(cs: card list): bool = raise NotImplemented320
+card5_fullhouse(cs: card list): bool = 
+let 
+  (*Counts the number of cards with a given rank*)
+  fun counter(cs: card list, count: int, rank:int) = 
+    case cs of 
+      [] => count
+      | h::t => if (rank2int(card_rank(h)) = rank) then counter(t, count+1, rank) else counter(t, count, rank)
+  
+
+  (*Gets last card in list*)
+  fun getlast(cs: card list) = 
+    case cs of
+      [] => raise Empty
+      | h::[] => h
+      | h::t => getlast(t)
+
+  (*Counts the number of cards with rank == head rank *)
+  val count1 = counter(cs, 0, rank2int(card_rank(hd(cs))))
+  (*Counts the number of cards with rank == last rank *)
+  val count2 = counter(cs,0, rank2int(card_rank(getlast(cs))))
+  
+in
+  
+  (*If there are 3 cards with the same rank and 2 cards with the same rank, then it is a full house*)
+  if count1 = 3 andalso count2 = 2 then true 
+  else ( if count1 = 2 andalso count2 = 3 then true else false )
+
+end
+
 
 (* ****** ****** *)
 

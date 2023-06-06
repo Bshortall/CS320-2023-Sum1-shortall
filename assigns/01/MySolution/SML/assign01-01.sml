@@ -24,8 +24,11 @@ fun
 xlist_size(xs: 'a xlist): int = 
     case xs of
         xlist_nil => 0
-      | head::tail => 1 + xlist_size(tail)
-      | _ => raise XlistConsMatch
+      | xlist_cons(head,tail) => 1 + xlist_size(tail)
+      | xlist_snoc(head, _) => 1 + xlist_size(head)
+      | xlist_append(xs1, xs2) => xlist_size(xs1) + xlist_size(xs2)
+      | xlist_reverse(xs) => xlist_size(xs)
+
 
 (* ****** ****** *)
 

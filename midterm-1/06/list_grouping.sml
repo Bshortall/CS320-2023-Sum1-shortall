@@ -30,8 +30,26 @@ those in the library for this class.
 *)
 (* ****** ****** *)
 
-fun
-list_grouping(xs: int list): (int * int) list = 
+fun list_grouping(xs: int list): (int * int) list =
+    let
+
+        fun list_filter(func: 'a -> bool, xs: 'a list): 'a list =
+        case xs of
+            [] => []
+            | x::xs1 => if func x then x::list_filter(func,xs1)
+                        else list_filter(func,xs1)
+
+        fun count_element(x: int, xs: int list): int =
+            list_length(list_filter((fn y => x = y), xs))
+
+        fun helper(xs: int list): (int * int) list =
+            case xs of
+                [] => []
+              | x::xs1 => ( count_element(x, xs), x) :: helper(list_filter( (fn y => y <> x), xs1))
+    in
+        helper(xs)
+    end
+
 
 
 (* ****** ****** *)

@@ -58,24 +58,28 @@ the previous.
 fun construct_row(n: int, prev:int list): int list =
   let
     fun helper(i: int, acc: int list): int list =
-    case i of
-       n-1 => 1::acc
-      | _ => helper(i+1, (List.nth(prev, i - 1) + List.nth(prev, i))::acc )
+    if i = (n - 1) then
+      list_extend(acc, 1)
+    else
+    helper(i+1, list_extend(acc, (List.nth(prev, i - 1) + List.nth(prev, i)) ))
   in
-  helper(1, [1] )
+    helper(1, [1] )
   end
-(*
+
+
+
 fun
 magic_triangle (n : int) : int list list = 
   let
     fun helper(i: int, acc: int list list): int list list =
-    case i of
-      0 => [[1]]
-      | _ => helper(i-1, acc::construct_row(i, List.nth(acc, i - 1)))
+    if i = n+1 then
+      acc
+    else
+      helper(i+1, list_extend(acc, construct_row(i, List.nth(acc, i - 2))))
   in
-  helper(n, [])
+  helper(2, [[1]])
   end
-*)
+
 
 (* ****** ****** *)
 

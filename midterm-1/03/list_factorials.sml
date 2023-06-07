@@ -21,10 +21,7 @@ fun list_factorials(n: int): int list =
 let 
    fun helper(i: int, ys: int list ) = 
     if i >= n then ys
-    else helper(i+1, ((hd(ys) * i)::ys))
-
-   (* val h = int1_foldleft( List.range(), [1,1], fn(i, xs) => xs::(list_last(xs) * i)) *)
-    
+    else helper(i+1, ((hd(ys) * i)::ys))    
 in
 list_reverse(helper(2, [1,1]))
 end

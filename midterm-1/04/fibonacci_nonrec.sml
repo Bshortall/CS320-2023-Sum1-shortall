@@ -24,8 +24,7 @@ fun fibonacci_nonrec(x: int): int =
     val i = fn (x: int) => x>=2
     val j = fn (x: int) => x
   in
-    int1_foldleft f j (int1_filter i (int1_map g (int1_range x)))
-    + int1_foldleft f j (int1_filter i (int1_map h (int1_range x)))
+    
   end
 
 

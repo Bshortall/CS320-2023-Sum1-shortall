@@ -56,7 +56,7 @@ let
     | (xlist_snoc(x, _), _) => helper(x, i-1)
     | (xlist_append(x11, x12), _) => 
         if i < xlist_size(x11) then helper(x11, i)
-        else helper(x12, i - xlist_size(x11) - 1)
+        else helper(x12, i - xlist_size(x11))
     | (xlist_reverse(x), _) => helper(x, xlist_size(x) - i - 1 )
 in
   if i0 < 0 then raise XlistSubscript

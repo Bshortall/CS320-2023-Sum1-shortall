@@ -29,10 +29,11 @@ is not allowed to make use of library functions except
 those in the library for this class.
 *)
 (* ****** ****** *)
-(*
+
 fun
-list_grouping(xs: int list): (int * int) list = ...
-*)
+list_grouping(xs: int list): (int * int) list = 
+
+
 (* ****** ****** *)
 (*
 (*

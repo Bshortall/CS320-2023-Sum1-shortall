@@ -31,10 +31,22 @@ functions in your implementation of list_averages.
 *)
 (* ****** ****** *)
 
-(*
+
 fun
-list_averages(xs: real list): real list = ...
-*)
+list_averages(xs: real list): real list = 
+    let
+        fun
+        list_averages_helper(xs: real list, ys: real list, i: int): real list =
+            case xs of
+            [] => ys
+            | _ => list_averages_helper(tl xs, ys @ [((hd xs) + (hd ys) * (int2real i)) / (int2real (i + 1))], i + 1)
+    in
+        list_averages_helper(xs, [hd xs], 1)
+    end
+
+(* ****** ****** *)
+
+
 
 (* ****** ****** *)
 

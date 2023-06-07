@@ -28,11 +28,28 @@ implementation.
 //
 *)
 (* ****** ****** *)
-(*
+
 fun
 list_pairing
-(xs: 'a list): ('a * 'a) list * 'a option = ...
-*)
+(xs: 'a list): ('a * 'a) list * 'a option = 
+let
+    val n = length(xs)
+    fun pairs_helper(xs: 'a list, ys: ('a * 'a) list, i:int): ('a * 'a) list =
+        if i >= n div 2 then ys
+        else pairs_helper(tl(xs), ys@[(hd(xs), List.nth(xs, length(xs) - 1 - i))], i+1)
+
+
+    fun opt_helper(xs: 'a list, ys: ('a * 'a) list): ('a * 'a) list * 'a option =
+        if length(xs) mod 2 = 0 then (ys, NONE)
+        else (ys, SOME(List.nth(xs, length(xs) div 2)) )
+        
+
+in
+
+opt_helper(xs, pairs_helper(xs, [], 0))
+
+end
+
 (* ****** ****** *)
 
 (* end of [CS320-2023-Sum1-midterm1-list_pairing.sml] *)

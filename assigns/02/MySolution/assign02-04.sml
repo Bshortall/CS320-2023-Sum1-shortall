@@ -32,10 +32,7 @@ let
         [] => res
         | x::xs' => if size < length(get_subset(x::xs', [])) then find_longest(xs', get_subset(x::xs', []), length(get_subset(x::xs', []))) else find_longest(xs', res, size)
 
-    fun find_longest_longest(xs: int list, res: int list, size:int): int list =
-    case xs of
-        [] => res
-        | x::xs' => 
+    
 
 in
 find_longest(xs, [],0)

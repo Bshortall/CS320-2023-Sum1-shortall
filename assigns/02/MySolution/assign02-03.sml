@@ -13,6 +13,20 @@ list_tabulate(n: int, f: int -> 'a): 'a list
 //
 *)
 
+fun 
+list_tabulate(n: int, f: int -> 'a): 'a list =
+let
+    fun
+    loop(i: int, acc: 'a list): 'a list =
+    if i < 0 then
+        acc
+    else
+        loop(i-1, (f i)::acc)
+in
+    loop(n-1, [])
+end
+
+
 (* ****** ****** *)
 
 (* end of [CS320-2023-Sum1-assign02-03.sml] *)

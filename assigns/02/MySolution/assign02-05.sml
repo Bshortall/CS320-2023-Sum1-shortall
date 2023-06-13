@@ -30,6 +30,11 @@ in
 end
 *)
 
+fun isPrime(n0: int): bool =
+if n0 < 2 then false else
+list_forall(list_fromto(2,n0), fn i0:int => n0 mod i0 <> 0)
+
+
 (* ****** ****** *)
 
 (* end of [CS320-2023-Sum1-assign02-05.sml] *)

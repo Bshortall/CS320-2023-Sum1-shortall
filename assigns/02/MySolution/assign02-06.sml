@@ -30,11 +30,30 @@ of a set is insignificant.
 *)
 (* ****** ****** *)
 
-(*
+(*)
 val
 list_subsets =
-fn(xs: 'a list) => ...
+fn(xs: 'a list) =>
 *)
+
+fun list_subsets(xs: 'a list): 'a list list =
+    let
+        val subsets = [[]]  
+
+        fun add_to_subsets(x: 'a, subsets: 'a list list): 'a list list =
+            list_map (subsets, fn (subset: 'a list) => x :: subset)  
+
+        fun process_elements([], subsets: 'a list list): 'a list list =
+            subsets
+          | process_elements(x :: xs, subsets: 'a list list): 'a list list =
+            let
+                val new_subsets = add_to_subsets(x, subsets) 
+            in
+                process_elements(xs, subsets @ new_subsets)  
+            end
+    in
+        process_elements(xs, subsets)
+    end
 
 (* ****** ****** *)
 

@@ -30,11 +30,21 @@ then it is DISQUALIFIED.
 *)
 (* ****** ****** *)
 
-(*
+(*attempt 1: zipping does not work because the x, y pair do not need to be at the same index
 val
 quiz02_02 =
-fn(xs: int list, ys: int list) => ...
+fn(xs: int list, ys: int list) => 
+list_z2forall(xs, ys, fn(x:int, y:int) => abs(x-y) >= 10)
 *)
+
+val
+quiz02_02 =
+fn(xs: int list, ys: int list) =>
+let
+val opp: bool = list_forall(xs, fn(x:int) => list_forall(ys, fn(y:int) => abs(x-y) >= 10))
+in
+not opp
+end
 
 (* ****** ****** *)
 

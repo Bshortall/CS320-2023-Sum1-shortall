@@ -72,7 +72,7 @@ fun
 magic_triangle (n : int) : int list list = 
   let
     fun helper(i: int, acc: int list list): int list list =
-    if i = n+1 then
+    if i = n+2 then
       acc
     else
       helper(i+1, list_extend(acc, construct_row(i, List.nth(acc, i - 2))))

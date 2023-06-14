@@ -25,10 +25,28 @@ then it is DISQUALIFIED.
 *)
 (* ****** ****** *)
 
-(*
+(*first label the initial list. then iterates through the labeled list, if the value is greater than the remaining substring it is appended to the result*)
+(*find substring by filtering labeled list by index, then mapping to an int list rather than int*int list*)
 val quiz02_03 =
-fn(xs: int list) => ...
+fn(xs: int list) =>
+let 
+val labeled: (int*int) list = list_labelize(xs)
+in 
+list_foldl(labeled, [], fn(acc:int list, (x1,x2):int*int) => if list_forall(list_map(list_filter(labeled, fn((z1,z2):int*int) => z1>x1), fn((z1,z2):int*int) => z2), fn(y:int) => x2 > y) then list_extend(acc, x2) else acc)
+end
+
+(* first attempt: mis read directions
+let 
+
+val labeled = list_labelize(xs)
+val evens = list_foldl(labeled, [], fn(acc:int list, x: int*int) => if #1 x mod 2 = 0 then list_extend(acc, #2 x) else acc )
+val odds = list_foldl(labeled, [], fn(acc:int list, x: int*int) => if #1 x mod 2 <> 0 then list_extend(acc, #2 x) else acc )
+
+in
+val res = list_z2forall(evnes, odds, fn(x:int, y:int) => x > y)
+end
 *)
+
 
 (* ****** ****** *)
 

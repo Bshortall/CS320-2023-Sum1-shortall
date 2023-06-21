@@ -18,6 +18,17 @@ stream consist of lists that are columns of the
 matrix.
 *)
 
+fun
+stream_ziplst(str_list: 'a stream list): 'a list stream =
+let
+
+val get_values: 'a list stream = list_foldl(str_list, [], fn(acc: 'a list, x) => list_extend(acc, tl(x) ) )
+
+in
+ get_values
+end
+
+
 (* ****** ****** *)
 
 (* end of [CS320-2023-Sum1-assign03-08.sml] *)

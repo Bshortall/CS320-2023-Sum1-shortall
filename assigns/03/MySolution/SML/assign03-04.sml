@@ -19,9 +19,19 @@ And so on, and so forth
 
 (* ****** ****** *)
 
-(*
-val the_ln2_stream: real stream = fn() => ...
-*)
+
+val the_ln2_stream: real stream = 
+let
+    fun loop(acc: real, n: real) = fn() =>
+    if Real.floor(n) mod 2 <> 0
+    then strcon_cons (acc, loop(acc - 1.0 /(n + 1.0), n+1.0))
+    else
+    strcon_cons(acc, loop(acc + 1.0 /(n + 1.0), n+1.0))
+in
+    loop(1.0, 1.0)
+end
+
+
 
 (* ****** ****** *)
 

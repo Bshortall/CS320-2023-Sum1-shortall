@@ -13,9 +13,18 @@ if i1+j1 < i2+j2.
 
 (* ****** ****** *)
 
-(*
-val theNatPairs: (int*int) stream = fn () => ...
-*)
+
+
+val theNatPairs: (int*int) stream =
+let
+  fun helper( sum:int, iter: int) = fn() =>
+    if iter = 0 then
+      strcon_cons((0, sum), helper(sum+1, sum+1))
+    else
+      strcon_cons((iter, sum - iter), helper(sum, iter-1))
+in
+  helper(0,0)
+end
 
 (* ****** ****** *)
 

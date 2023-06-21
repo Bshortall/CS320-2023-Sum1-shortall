@@ -60,6 +60,8 @@ val AB =
 val
 string_iforeach =
 foreach_to_iforeach(string_foreach)
+
+(*Seperates a string into a list of characters, and applies fopr to each char*)
 val
 string_imap_list =
 fn(cs, ifopr) =>
@@ -67,10 +69,38 @@ foreach_to_map_list(string_iforeach)(cs, ifopr)
 
 (* ****** ****** *)
 
-(*
+
+(*write function that takes index, replaces the char at index with alphabet - current letter*)
+(*converts to a string, append to result*)
+
 val
-word_neighbors = fn(word: string) => ...
-*)
+word_neighbors = fn(word: string) => let
+
+val seperated_word = string_imap_list(word, fn(c) => c)
+
+(*replaces characater at index with ch*)
+fun replace_char_by_index(index: int, ch: char) = list_foldl(seperated_word, [], fn(acc: char list, (i, c)) => if i = index then list_append(acc, [ch]) else list_append( acc, [c]))
+
+(*convert char list to string*)
+fun implode(cs: char list): string = 
+String.implode cs
+
+(*finds all neighbors (including same word) by index*)
+fun neighbors_by_index(index: int): string list = 
+  string_foldleft(AB, [], fn(acc: string list, c) => list_extend(acc, implode(replace_char_by_index(index, c))) )
+
+(*finds all neighbors for all indicies (includes base word)*)
+fun all_neighbors(): string list = 
+list_foldl(seperated_word, [], fn(acc: string list, (i, c)) => list_append(acc, neighbors_by_index(i)))
+
+in
+(*filter out base word*)
+list_filter(all_neighbors(), fn(w) => w <> word)
+end
+
+
+
+
 
 (* ****** ****** *)
 

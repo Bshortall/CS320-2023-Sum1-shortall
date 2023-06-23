@@ -29,6 +29,20 @@ stream_evaluate
 , x0: real): real stream = ...
 *)
 
+fun stream_evaluate(fxs: real stream, x0: real) = 
+let
+  fun helper(sum: real, count:real) = fn() =>
+    let
+      val strcon_cons(x, fxs) = fxs()
+      val value = x * Math.pow(x0, count)
+    in
+    strcon_cons(sum+value, helper(sum+value, count+1.0))
+    end
+in
+helper(0.0, 0.0)
+end
+
+
 (* ****** ****** *)
 
 (* end of [CS320-2023-Sum1-midterm2-stream_evaluate.sml] *)

@@ -22,7 +22,7 @@ fun
 stream_ziplst(str_list: 'a stream list): 'a list stream =
 let
 
-val get_values: 'a list stream = list_foldl(str_list, [], fn(acc: 'a list, x) => list_extend(acc, tl(x) ) )
+val get_values: 'a list stream = list_foldl(str_list, [], fn(acc: 'a list, x) => list_extend(acc, hd(x) ) )
 
 in
  get_values

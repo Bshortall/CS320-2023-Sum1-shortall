@@ -42,6 +42,25 @@ perm_counting_out
 (xs: int list, k0: int): int list = ...
 *)
 
+(*This solution does not work. I overlooked the fact that the start of the next count begins at where we left off, not 0*)
+fun
+perm_counting_out
+(xs: int list, k0: int): int list =
+let
+    val labeled = list_labelize(xs)
+
+    fun remove_by_idx(theList: int list, idx: int): int list =
+    list_map(list_filter(list_labelize(theList), fn(x,y) => x <> idx), fn(x0) => #2 x0)
+
+    fun helper(res: int list, currList: int list, k): int list =
+        if currList = [] then res
+        else helper(list_extend(res, List.nth(currList, k mod list_length(currList))), 
+                    remove_by_idx(currList, k mod list_length(currList)), k)
+in
+(*I for some reason excluded this line in my written response. I think based on the structure of my code it is quite clear I would have put this exact line in if I were more careful*)
+    helper([], xs, k0)
+end
+
 (* ****** ****** *)
 
 (* end of [CS320-2023-Spring-midterm2-perm_counting_out.sml] *)

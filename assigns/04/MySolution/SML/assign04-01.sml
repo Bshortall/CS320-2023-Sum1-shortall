@@ -16,6 +16,33 @@ stream_permute_list(xs: 'a list): 'a list stream = ...
 //
 *)
 
+
+fun
+stream_permute_list(xs: 'a list): 'a list stream = 
+let
+
+    fun permutations [] = [[]]
+    | permutations (x::xs) =
+        let
+        val perms = permutations xs
+        fun insertEverywhere x [] = [[x]]
+            | insertEverywhere x (y::ys) =
+            (x::y::ys) :: List.map (fn p => y::p) (insertEverywhere x ys)
+        in
+        list_concat (list_map (perms,  fn p => insertEverywhere x p) )
+        end
+
+    val all_perms = permutations xs
+
+in
+list_streamize(all_perms)
+end
+
+
+
+
+ 
+
 (* ****** ****** *)
 
 (* end of [CS320-2023-Sum1-assign04-01.sml] *)

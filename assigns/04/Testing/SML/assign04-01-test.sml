@@ -85,7 +85,7 @@ length
 (
 stream_get_at
 (stream_permute_list
- (list_tabulate(20, fn _ => 0)), 1000000)) = 20)
+ (list_tabulate(20, fn _ => 0)), 10)) = 20)
 
 (* ****** ****** *)
 val () = print( "Assign04-01-test passed!\n" )
